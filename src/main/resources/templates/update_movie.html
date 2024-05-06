@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Movie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1>Movie Management System</h1>
+  <hr>
+  <h2>Update Movie</h2>
+
+  <form th:action="@{/saveMovie}" th:object="${movie}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
+    <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{year}" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{genre}" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{description}" class="form-control mb-4 col-4">
+    <input required type="file" name="image" accept="image/png, image/jpeg" placeholder="Movie Image" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{languages}" class="form-control mb-4 col-4">
+    <button type="submit" class="btn btn-info col-2">Save Movie</button>
+  </form>
+</div>
+</body>
+</html>

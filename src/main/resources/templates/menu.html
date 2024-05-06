@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MOVIE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<style>
+    *{
+        font-family: 'Poppins', sans-serif;
+        -webkit-user-select: none;
+        /*-moz-user-select: -moz-none;*/
+        -o-user-select: none;
+        user-select: none;
+    }
+    img {
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+    }
+    img {
+        pointer-events: none;
+    }
+    .movie_card{
+        padding: 0 !important;
+        width: 22rem;
+        margin:14px;
+        border-radius: 10px;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    }
+    .movie_card img{
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 33rem;
+    }
+    .movie_info{
+        color: #5e5c5c;
+    }
+
+    .movie_info i{
+        font-size: 20px;
+    }
+    .card-title{
+        width: 80%;
+        height: 4rem;
+    }
+    .play_button{
+        background-color: #ff3d49;
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        right: 20px;
+        bottom: 111px;
+        font-size: 27px;
+        padding-left: 21px;
+        padding-top: 16px;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+
+    .credits{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 2px solid #8e24aa;
+        font-size: 18px;
+    }
+    .credits .card-body{
+        padding: 0;
+    }
+    .credits p{
+        padding-top: 15px;
+        padding-left: 18px;
+    }
+    .credits .card-body i{
+        color: #8e24aa;
+    }
+</style>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Movie App</h2>
+        <a class="btn btn-primary btn-sm mb-3" th:href="@{/showActors}">Show Actors</a>
+        <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary btn-sm mb-3" th:href="@{/addNewMovie}">Add New Movie</a>
+        <form th:action="@{/}" method="get">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input name="keyword" id="txtSearch" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <button class="btn btn-outline-success" type="submit">
+                    Search
+                </button>
+            </div>
+        </form>
+        <div class="row justify-content-center">
+            <div class="card movie_card" th:each="movie:${movies}">
+                <img th:src="@{${movie.photosImagePath}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${movie.name}"></h5>
+                    <div>
+                        <span class="movie_info" th:text="${movie.year}" ></span>
+                    </div>
+                    <div>
+                        <span class="movie_info" th:text="${movie.description}" ></span>
+                    </div>
+                    Actors:
+                    <ul th:each="actor: ${movie.actors}">
+                        <li th:text="${actor.name} +' '+ ${actor.surname}"></li>
+                    </ul>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/showFormForUpdate/{id}(id=${movie.id})}" class="btn btn-primary">Update</a>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/deleteMovie/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

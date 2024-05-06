@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Actor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+<h1>Movie Management System</h1>
+<hr>
+<h2>Update Actor</h2>
+
+<form th:action="@{/saveActor}" th:object="${actor}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
+    <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+    <button type="submit" class="btn btn-info col-2">Save Actor</button>
+</form>
+</body>
+</html>
