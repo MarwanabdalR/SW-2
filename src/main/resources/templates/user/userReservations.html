@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Font Awesome CSS -->
+  <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+
+<!--  <style>-->
+<!--    ::placeholder {-->
+<!--      color: white;-->
+<!--    }-->
+<!--  </style>-->
+
+  <title>My reservations list</title>
+</head>
+
+<body style="background-color: black">
+
+<div class="container mt-3">
+
+  <h2 class="mb-5" style="color: goldenrod;">List of my reservations</h2>
+
+  <form class="row g-3">
+    <div class="col-auto">
+      <a th:href="@{/user/menu}" class="btn mb-1" style="border-color: goldenrod; color: goldenrod">
+        Back to the Menu
+      </a>
+    </div>
+  </form>
+
+  <div class="table-responsive mt-4">
+    <table class="table" style="border: goldenrod">
+      <thead style="border: goldenrod; color: goldenrod">
+      <tr>
+        <th>Movie name</th>
+        <th>Duration (in minutes)</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Cinema hall number</th>
+        <th>Seat row</th>
+        <th>Seat number</th>
+        <th>Ticket type</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="ticket : ${listOfTickets}">
+        <td th:text="${ticket.movieSeat.scheduleOfMovieId.movie.name}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.scheduleOfMovieId.movie.duration}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.scheduleOfMovieId.date}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.scheduleOfMovieId.time}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.scheduleOfMovieId.hall.number}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.seatId.row}" style="color: white"/>
+        <td th:text="${ticket.movieSeat.seatId.number}" style="color: white"/>
+        <td th:text="${ticket.ticket.name}" style="color: white"/>
+        <td>
+          <a th:href="@{/user/deleteReservation(ticketId=${ticket.id})}"
+             class="btn" style="border-color: goldenrod; color: goldenrod" onclick="if (!(confirm('Are you sure you want to delete this reservation?'))) return false">
+            Delete
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-5" style="color: goldenrod; text-align: center" th:if="${listOfTickets.isEmpty()}">
+    <h3>
+      <i class="fa-solid fa-user-secret me-3"></i>
+      No reservations yet!
+    </h3>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <style>
+    ::placeholder {
+      color: white;
+    }
+  </style>
+
+  <title>Cinema halls</title>
+</head>
+
+<body style="background-color: black">
+
+<div class="container mt-3">
+
+  <h2 class="mb-5" style="color: goldenrod;">List of cinema halls</h2>
+
+  <form th:action="@{/administration/menu/searchCinemaHalls}" class="row g-3">
+    <div class="col-auto">
+      <a th:href="@{/administration/menu/cinemaHalls/showFormForAddHall}"
+         class="btn mb-1" style="border-color: goldenrod; color: goldenrod">
+        Add cinema hall
+      </a>
+    </div>
+
+    <div class="col-auto mx-auto">
+      <label>
+        <input class="form-control" style="border-color: goldenrod; background-color: black; color: white" type="number" name="hallNumber" placeholder="Search by hall number">
+      </label>
+      <button class="btn mb-1" style="border-color: goldenrod; color: goldenrod" type="submit">Search</button>
+      <a th:href="@{/administration/menu/cinemaHalls}" class="btn mb-1" style="border-color: goldenrod; color: goldenrod">
+        Reset filter
+      </a>
+    </div>
+
+    <div class="col-auto">
+      <a th:href="@{/administration/menu}" class="btn mb-1" style="border-color: goldenrod; color: goldenrod">
+        Back to the Menu
+      </a>
+    </div>
+  </form>
+
+  <div class="table-responsive mt-4">
+    <table class="table" style="border: goldenrod">
+      <thead style="border: goldenrod; color: goldenrod">
+      <tr>
+        <th>Cinema hall number</th>
+        <th>Cinema hall capacity</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="tempHall : ${halls}">
+        <td th:text="${tempHall.number}" style="color: white; width: 400px;"></td>
+        <td th:text="${tempHall.capacity}" style="color: white"></td>
+        <td style="width: 400px;">
+          <a th:href="@{/administration/menu/cinemaHalls/showFormForUpdateHall(hallId=${tempHall.id})}"
+             class="btn" style="border-color: goldenrod; color: goldenrod">
+            Update
+          </a>
+          <a th:href="@{/administration/menu/cinemaHalls/deleteHall(hallId=${tempHall.id})}"
+             class="btn" style="border-color: goldenrod; color: goldenrod" onclick="if (!(confirm('Are you sure you want to delete this cinema hall?'))) return false">
+            Delete
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

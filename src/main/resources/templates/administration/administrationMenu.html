@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+
+    <style>
+        .link {
+            color: black;
+            text-decoration: none;
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+
+    <title>Administration menu</title>
+</head>
+
+<body style="background-color: black">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: goldenrod;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home">
+            <img src="/images/Java_logo_icon.png" alt="Logo" width="50" height="24" class="d-inline-block align-text-top">
+            Cinema
+        </a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="bi bi-person-circle nav-link active" href="/user/menu" th:text="'   ' + ${userName}"/>
+                </li>
+                <form action="#" th:action="@{/logout}" method="post">
+                    <li class="nav-item">
+                        <button class="nav-link" type="submit" style="background-color: goldenrod; border: goldenrod">Logout</button>
+                    </li>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container position-absolute top-50 start-50 translate-middle">
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/administration/menu/movies">
+                <div class="card-header link">Movies</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-film"></i>
+                        Movies
+                    </h5>
+                    <p class="card-text">View, edit or update a list of movies played in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/administration/menu/cinemaHalls">
+                <div class="card-header link">Halls</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-camera-reels-fill"></i>
+                        Cinema halls
+                    </h5>
+                    <p class="card-text">View, edit or update a list of cinema halls in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/administration/menu/tickets">
+                <div class="card-header link">Tickets</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-ticket-detailed"></i>
+                        Ticket types
+                    </h5>
+                    <p class="card-text">View, edit or update a list of ticket types in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/administration/menu/seats">
+                <div class="card-header link">Seats</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-couch"></i>
+                        Seats
+                    </h5>
+                    <p class="card-text">View, edit or update a list of seats in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/administration/menu/schedule">
+                <div class="card-header link">Schedule</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-calendar-week"></i>
+                        Schedule of movies
+                    </h5>
+                    <p class="card-text">View, edit or update a schedule of movies in the Java Cinema</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100" style="background-color: goldenrod; color: black">
+            <a href="/home">
+                <div class="card-header link">Home</div>
+                <div class="card-body link">
+                    <h5 class="card-title">
+                        <i class="bi bi-house-door-fill"></i>
+                        Home Page
+                    </h5>
+                    <p class="card-text">Back to the Home Page</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Font Awesome CSS -->
+    <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+
+    <title>Add new seat</title>
+</head>
+
+<body style="background-color: black">
+
+<div class="container col-3 position-absolute top-50 start-50 translate-middle">
+    <div class="mt-5">
+        <div class="card" style="border-color: goldenrod">
+            <div class="card-header" style="background-color: goldenrod">
+                Add new seat
+            </div>
+
+            <div class="card-body" style="background-color: black">
+                <div class="card-text">
+                    <div class="mb-3" style="color: red" th:if="${seatNumberAlreadyExists}">
+                        <i>Seat number in this row and in this cinema hall already exists!</i>
+                    </div>
+                    <form action="#" th:action="@{/administration/menu/seats/saveSeat}"
+                          th:object="${seat}" method="POST" onsubmit="return checkConsistency()">
+
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="fa-solid fa-couch"></i>
+                            <label for="seatNumber" class="form-label">Seat number</label>
+                            <input id="seatNumber" required type="number" th:field="*{number}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="seatNumberHelp"/>
+                            <div id="seatNumberHelp" class="form-text">Please enter a number of the seat.</div>
+                        </div>
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="fa-solid fa-diagram-predecessor"></i>
+                            <label for="rowNumber" class="form-label">Row number</label>
+                            <input id="rowNumber" type="number" required th:field="*{row}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="rowNumberHelp"/>
+                            <div id="rowNumberHelp" class="form-text">Please enter a row number of the seat.</div>
+                        </div>
+
+                        <div class="mb-3" style="color: goldenrod">
+                            <i class="bi bi-camera-reels-fill"></i>
+                            <label for="cinemaHall" class="form-label">Cinema hall</label>
+                            <select id="cinemaHall" th:field="*{hall}" class="form-control" style="border-color: goldenrod; background-color: black; color: white" aria-describedby="cinemaHallHelp">
+                                <option th:each="hall : ${availableHalls}" th:value="${hall.getId()}" th:text="${hall.getNumber()}"></option>
+                            </select>
+                            <div id="cinemaHallHelp" class="form-text">Please choose a cinema hall.</div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between" style="text-align: center">
+                            <button type="submit" class="btn" style="background-color: goldenrod">
+                                <i class="bi bi-save"></i>
+                                Save
+                            </button>
+                            <a class="btn btn-secondary ml-5" style="color: black" href="/administration/menu/seats">
+                                Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function checkConsistency() {
+        return validateSeat(document.getElementById('seatNumber').value) && validateRow(document.getElementById('rowNumber').value);}
+    function validateSeat(seat){
+        if(seat > 0 && seat < 40){
+            return true;
+        } else {
+            alert("Seat number must be greater than 0 and smaller than 40.")
+            return false;
+        }
+    }
+    function validateRow(row){
+        if(row > 0 && row < 40){
+            return true;
+        } else {
+            alert("Row number must be greater than 0 and smaller than 40.")
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>
+
+
+

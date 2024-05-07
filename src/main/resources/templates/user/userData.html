@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Font Awesome CSS -->
+  <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+
+  <title>My Account</title>
+</head>
+
+<body style="background-color: black">
+
+<div class="container col-3 position-absolute top-50 start-50 translate-middle">
+  <div id="loginbox" class="mt-5">
+    <div class="card" style="border-color: goldenrod">
+      <div class="card-header" style="background-color: goldenrod">
+        My Account
+      </div>
+      <div class="card-body" style="background-color: black">
+        <div class="card-text">
+          <div class="mb-3" style="color: goldenrod">
+            <i class="bi bi-person-circle"></i>
+            <label for="userName" class="form-label">Username:</label>
+            <a id="userName" th:text="${user.userName}"/>
+          </div>
+          <div class="mb-3" style="color: goldenrod">
+            <i class="bi bi-person-vcard-fill"></i>
+            <label for="firstName" class="form-label">First name:</label>
+            <a id="firstName" th:text="${user.firstName}"/>
+          </div>
+          <div class="mb-3" style="color: goldenrod">
+            <i class="bi bi-person-vcard-fill"></i>
+            <label for="lastName" class="form-label">Last name:</label>
+            <a id="lastName" th:text="${user.lastName}"/>
+          </div>
+          <div class="mb-3" style="color: goldenrod">
+            <i class="bi bi-envelope-at-fill"></i>
+            <label for="email" class="form-label">Email:</label>
+            <a id="email" th:text="${user.email}"/>
+          </div>
+          <div class="col-12 d-flex justify-content-between" style="text-align: center">
+            <a class="btn" style="background-color: goldenrod" th:href="@{/user/updateData}">
+              <i class="bi bi-person-fill-check"></i>
+              Update your account
+            </a>
+            <a class="btn btn-secondary ml-5" style="color: black" th:href="@{/user/menu}">
+              Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
