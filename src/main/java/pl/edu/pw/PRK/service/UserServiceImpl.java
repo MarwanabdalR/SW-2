@@ -1,5 +1,10 @@
 package pl.edu.pw.PRK.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,20 +12,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import pl.edu.pw.PRK.dao.RoleDao;
 import pl.edu.pw.PRK.dao.UserDao;
 import pl.edu.pw.PRK.entity.Role;
 import pl.edu.pw.PRK.entity.User;
 import pl.edu.pw.PRK.entity.WebUser;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.regex.Pattern;
+import scala.collection.immutable.List;
+
+
 
 @Service
 public class UserServiceImpl implements UserService {
 
+
+	
 	private final UserDao userDao;
 
 	private final RoleDao roleDao;
@@ -33,6 +39,7 @@ public class UserServiceImpl implements UserService {
 		this.roleDao = roleDao;
 		this.passwordEncoder = passwordEncoder;
 	}
+
 
 	@Override
 	@Transactional
@@ -52,29 +59,42 @@ public class UserServiceImpl implements UserService {
 		user.setFirstName(webUser.getFirstName());
 		user.setLastName(webUser.getLastName());
 		user.setEmail(webUser.getEmail());
+		user.setEnabled(webUser.getEnabled());
 
 		// give user default role of "user"
-		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
+		if(webUser.getEnabled()){
+			user.setRoles(Collections.singletonList(roleDao.findRoleByName("ADMIN")));
+		}
+		else{user.setRoles(Collections.singletonList(roleDao.findRoleByName("USER")));}
+		
 
+		
 		// save user in the database
 		userDao.save(user);
 	}
 
 	@Override
-	@Transactional
-	public void updateData(User user) {
-		user.setRoles(Collections.singletonList(roleDao.findRoleByName("ROLE_USER")));
-		if(user.getUserName().equals("kamil")||user.getUserName().equals("szymon"))
-			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_ADMIN"),roleDao.findRoleByName("ROLE_USER")));
+    @Transactional
+    public void updateData(User user) {
+    // Always assign the "USER" role to every user
+    Collection<Role> roles = Collections.singleton(roleDao.findRoleByName("USER"));
 
-		Pattern BCRYPT_PATTERN = Pattern.compile("\\A\\$2a?\\$\\d\\d\\$[./0-9A-Za-z]{53}");
+    // If the user is enabled, assign the "ADMIN" role
+    if (user.isEnabled()) {
+        roles.add(roleDao.findRoleByName("ADMIN"));
+    }
 
-		if (!BCRYPT_PATTERN.matcher(user.getPassword()).matches()) {
-			user.setPassword(passwordEncoder.encode(user.getPassword()));
-		}
+    // Set the roles for the user
+    user.setRoles(roles);
 
-		userDao.save(user);
-	}
+    // Check if the password needs to be encoded
+    if (!passwordEncoder.matches(user.getPassword(), user.getPassword())) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+
+    // Save the updated user
+    userDao.save(user);
+}
 
 	@Override
 	@Transactional

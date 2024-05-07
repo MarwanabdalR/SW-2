@@ -13,6 +13,38 @@
     <!-- Font Awesome CSS -->
     <link href="/css/fontawesome/css/fontawesome.css" rel="stylesheet">
     <link href="/css/fontawesome/css/solid.css" rel="stylesheet">
+    <style>
+        /* Your custom CSS styles */
+        body {
+            background-color: black;
+        }
+
+        .card {
+            border-color: goldenrod;
+        }
+
+        .card-header {
+            background-color: goldenrod;
+        }
+
+        .card-body {
+            background-color: black;
+        }
+
+        .card-text {
+            color: goldenrod;
+        }
+
+        .form-control {
+            border-color: goldenrod;
+            background-color: black;
+            color: white;
+        }
+
+        .form-check-label {
+            color: goldenrod;
+        }
+    </style>
 </head>
 
 <body style="background-color: black">
@@ -89,6 +121,12 @@
                             <div id="emailHelp" class="form-text">Please enter your email.</div>
                         </div>
 
+                        <!-- Checkbox for Terms and Conditions -->
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="termsCheckbox" th:field="*{enabled}" >
+                            <label class="form-check-label" for="termsCheckbox"> admin </label>
+                        </div>
+
                         <!-- Registration Button -->
                         <div class="col-12 d-flex justify-content-between" style="text-align: center">
                             <button type="submit" class="btn" style="background-color: goldenrod">
@@ -139,6 +177,13 @@
             return false;
         }
     }
+    function validateAdmin() {
+        return document.getElementById('termsCheckbox').checked;
+    }
+
+    
+
+    
 </script>
 
 </body>

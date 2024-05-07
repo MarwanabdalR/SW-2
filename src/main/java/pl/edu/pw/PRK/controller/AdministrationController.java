@@ -1,5 +1,7 @@
 package pl.edu.pw.PRK.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,13 +9,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.edu.pw.PRK.entity.*;
-import pl.edu.pw.PRK.service.*;
 
-import java.util.List;
-
+import pl.edu.pw.PRK.entity.Hall;
+import pl.edu.pw.PRK.entity.Movie;
+import pl.edu.pw.PRK.entity.ScheduleOfMovie;
+import pl.edu.pw.PRK.entity.Seat;
+import pl.edu.pw.PRK.entity.Ticket;
+import pl.edu.pw.PRK.service.HallService;
+import pl.edu.pw.PRK.service.MovieSeatsService;
+import pl.edu.pw.PRK.service.MovieService;
+import pl.edu.pw.PRK.service.ScheduleOfMoviesService;
+import pl.edu.pw.PRK.service.SeatService;
+import pl.edu.pw.PRK.service.TicketService;
 @Controller
 @RequestMapping("/administration")
 public class AdministrationController {
