@@ -18,7 +18,7 @@ import pl.edu.pw.PRK.dao.UserDao;
 import pl.edu.pw.PRK.entity.Role;
 import pl.edu.pw.PRK.entity.User;
 import pl.edu.pw.PRK.entity.WebUser;
-import scala.collection.immutable.List;
+// import scala.collection.immutable.List;
 
 
 
