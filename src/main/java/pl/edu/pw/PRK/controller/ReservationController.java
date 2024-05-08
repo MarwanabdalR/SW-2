@@ -24,7 +24,7 @@ public class ReservationController {
 
     @Autowired
     public ReservationController(MovieSeatsService movieSeatsService,TicketService ticketService, ScheduleOfMoviesService scheduleOfMoviesService,
-                                 SoldTicketsService soldTicketsService, UserService userService){
+                                SoldTicketsService soldTicketsService, UserService userService){
         this.movieSeatsService=movieSeatsService;
         this.ticketService=ticketService;
         this.scheduleOfMoviesService=scheduleOfMoviesService;
@@ -75,13 +75,6 @@ public class ReservationController {
             return "redirect:/user/reservations";
         }
     }
-
-
-
-
-
-
-
 
 
 
