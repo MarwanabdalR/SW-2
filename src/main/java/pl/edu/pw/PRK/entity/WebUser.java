@@ -84,4 +84,18 @@ public class WebUser {
 		this.enabled = enabled;
 	}
 
+	public WebUser(@NotNull(message = "is required") @Size(min = 1, message = "is required") String userName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String password,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String firstName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String lastName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") String email,
+			boolean enabled) {
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.enabled = enabled;
+	}
+
 }

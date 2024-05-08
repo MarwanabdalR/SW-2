@@ -67,7 +67,7 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Rząd: " + row + ", Miejsce: " + number;
+		return "Your row is : " + row + ", Your Seat Number is : " + number;
 	}
 }
 
