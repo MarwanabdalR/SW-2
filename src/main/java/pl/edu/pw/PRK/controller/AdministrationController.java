@@ -116,6 +116,21 @@ public class AdministrationController {
         return "administration/hall/cinemaHalls";
     }
 
+
+
+
+    @PostMapping("/menu/cinemaHalls")
+    public String createCinemaHall(@ModelAttribute("hall") Hall hall) {
+        hallService.save(hall);
+        return "redirect:/administration/menu/cinemaHalls";
+    }
+
+
+
+
+
+
+
     @GetMapping("/menu/cinemaHalls/showFormForAddHall")
     public String showFormForAddCinemaHall(Model model){
         model.addAttribute("hall",new Hall());
