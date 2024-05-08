@@ -51,6 +51,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(WebUser webUser) {
+		if(roleDao.findRoleByName("USER") == null){
+			Role user_Role = new Role("USER");
+			roleDao.saveRole(user_Role);
+		}
+		if(roleDao.findRoleByName("ADMIN") == null){
+		    Role admin_Role = new Role("ADMIN");
+		    roleDao.saveRole(admin_Role);
+		}
 		User user = new User();
 
 		// assign user details to the user object

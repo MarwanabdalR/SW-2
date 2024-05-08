@@ -5,5 +5,5 @@ import pl.edu.pw.PRK.entity.Role;
 public interface RoleDao {
 
 	Role findRoleByName(String theRoleName);
-	
+	public void saveRole(Role role);
 }
